@@ -433,7 +433,8 @@ class RespotRequest:
             "release_year": info["release_date"].split("-")[0],
             "disc_number": None,
             "audio_number": None,
-            "scraped_episode_id": ["id"],
+            "scraped_episode_id": episode_id_str,
+            "scraped_track_id": episode_id_str,
             "is_playable": info["is_playable"],
             "release_date": info["release_date"],
         }
