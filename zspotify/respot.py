@@ -214,6 +214,52 @@ class RespotRequest:
             print(e)
             return None
 
+    def get_episode_info(self, track_id) -> dict:
+        """Retrieves metadata for downloaded songs"""
+        try:
+            info = json.loads(
+                self.authorized_get_request(
+                    "https://api.spotify.com/v1/episodes?ids="
+                    + track_id
+                    + "&market=from_token"
+                ).text
+            )
+
+            # Sum the size of the images, compares and saves the index of the
+            # largest image size
+            sum_total = []
+            for sum_px in info["episodes"][0]["images"]:
+                sum_total.append(sum_px["height"] + sum_px["width"])
+
+            img_index = sum_total.index(max(sum_total)) if sum_total else -1
+
+            artist_id = info["episodes"][0]["show"]["publisher"]
+
+            artists = [data["name"] for data in info["tracks"][0]["artists"]]
+
+            # TODO: Implement genre checking
+            return {
+                "id": track_id,
+                "artist_id": "",
+                "artist_name": info["episodes"][0]["show"]["publisher"],
+                "album_artist": info["episodes"][0]["show"]["publisher"],
+                "album_name": info["episodes"][0]["show"]["name"],
+                "audio_name": info["episodes"][0]["name"],
+                "image_url": info["episodes"][0]["images"][img_index]["url"] if img_index >= 0 else None,
+                "release_year": info["episodes"][0]["release_date"].split("-")[0],
+                "disc_number": "",
+                "audio_number": "",
+                "scraped_song_id": info["episodes"][0]["id"],
+                "is_playable": info["episodes"][0]["is_playable"],
+                "release_date": info["episodes"][0]["release_date"],
+            }
+
+        except Exception as e:
+            print("###   get_episode_info - FAILED TO QUERY METADATA   ###")
+            print("episode_id:", track_id)
+            print(e)
+            return None
+
     def get_all_user_playlists(self):
         """Returns list of users playlists"""
         playlists = []

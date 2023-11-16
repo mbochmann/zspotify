@@ -294,8 +294,10 @@ class ZSpotify:
         if self.args.skip_downloaded and self.archive.exists(track_id):
             print(f"Skipping {track_id} - Already Downloaded")
             return True
-
-        track = self.respot.request.get_track_info(track_id)
+        if(caller == "show" || caller == "episode")
+            track = self.respot.request.get_episode_info(track_id)
+        else
+            track = self.respot.request.get_track_info(track_id)
 
         if track is None:
             print(f"Skipping {track_id} - Could not get track info")
@@ -509,9 +511,9 @@ class ZSpotify:
         elif parsed_url["artist"]:
             ret = self.download_artist(parsed_url["artist"])
         elif parsed_url["episode"]:
-            ret = self.download_track(parsed_url["episode"])
+            ret = self.download_track(parsed_url["episode"],None, "episode")
         elif parsed_url["show"]:
-            ret = self.download_all_show_episodes(parsed_url["show"])
+            ret = self.download_all_show_episodes(parsed_url["show"],"show")
         else:
             print("Invalid URL")
             return False
@@ -523,11 +525,12 @@ class ZSpotify:
             print("Show not found")
             return False
         episodes = self.respot.request.get_show_episodes(show_id)
+        basepath = self.music_dir / RespotUtils.sanitize_data(show["name"])
         if not episodes:
             print("Show has no episodes")
             return False
         for episode in episodes:
-            self.download_track(episode["id"], "show")
+            self.download_track(episode["id"],basepath, "show")
         print(f"Finished downloading {show['name']} show")
         return True
 
