@@ -277,10 +277,10 @@ class ZSpotify:
             filename = f"{artist_name} - " + filename
 
         elif caller == "show":
-            filename = f"{audio_number}. {audio_name}"
+            filename = f"{album_name}. {audio_name}"
 
         elif caller == "episode":
-            filename = f"{artist_name} - {audio_number}. {audio_name}"
+            filename = f"{artist_name} - {album_name}. {audio_name}"
 
         else:
             filename = f"{artist_name} - {audio_name}"
