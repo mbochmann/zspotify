@@ -356,7 +356,7 @@ class ZSpotify:
             disc_number=track["disc_number"],
             track_number=audio_number,
             album_artist=album_artist,
-            track_id_str=track["scraped_song_id"],
+            track_id_str=track_id,
             image_url=track["image_url"],
         )
         print(f"Finished downloading {filename}")
