@@ -310,6 +310,8 @@ class ZSpotify:
         audio_name = track.get("audio_name")
         audio_number = track.get("audio_number")
         artist_name = track.get("artist_name")
+        if caller == "episode":
+            artist_name = track.get("release_date")
         album_artist = track.get("album_artist")
         album_name = track["album_name"]
 
