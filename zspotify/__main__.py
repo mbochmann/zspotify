@@ -311,7 +311,7 @@ class ZSpotify:
         audio_number = track.get("audio_number")
         artist_name = track.get("artist_name")
         album_artist = track.get("album_artist")
-        album_name = track.get("album_name")
+        album_name = track["album_name"]
 
         filename = self.generate_filename(
             caller,
