@@ -473,6 +473,7 @@ class RespotRequest:
             "id": episode_id_str,
             "artist_id": info["show"]["id"],
             "artist_name": info["show"]["publisher"],
+            "album_name": RespotUtils.sanitize_data(info["show"]["name"]),
             "show_name": RespotUtils.sanitize_data(info["show"]["name"]),
             "audio_name": RespotUtils.sanitize_data(info["name"]),
             "image_url": info["images"][img_index]["url"] if img_index >= 0 else None,
