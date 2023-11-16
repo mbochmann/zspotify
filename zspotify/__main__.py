@@ -294,7 +294,7 @@ class ZSpotify:
         if self.args.skip_downloaded and self.archive.exists(track_id):
             print(f"Skipping {track_id} - Already Downloaded")
             return True
-        if caller == "show" || caller == "episode":
+        if caller == "show" or caller == "episode":
             track = self.respot.request.get_episode_info(track_id)
         else:
             track = self.respot.request.get_track_info(track_id)
