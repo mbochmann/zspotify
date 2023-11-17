@@ -2,6 +2,7 @@ import argparse
 import os
 import sys
 import time
+import msvcrt
 from getpass import getpass
 from pathlib import Path
 import importlib.metadata as metadata
@@ -695,8 +696,7 @@ class ZSpotify:
 
 
 def main():
-    unbuffered = os.fdopen(sys.stdout.fileno(), 'w', 0)
-    sys.stdout = unbuffered
+    msvcrt.setmode(sys.stdout.fileno(), os.O_BINARY)
     """Creates an instance of ZSpotify"""
     zs = ZSpotify()
 
