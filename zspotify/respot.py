@@ -46,25 +46,27 @@ class Respot:
             return ""
 
         # Determine format of file downloaded
-        audio_bytes_format = handler.determine_file_extension(audio_bytes)
-        print(audio_bytes_format);
-        # Format handling
-        output_path = temp_path
+        try:
+            audio_bytes_format = handler.determine_file_extension(audio_bytes)
+            print(audio_bytes_format);
+            # Format handling
+            output_path = temp_path
 
-        if extension == audio_bytes_format:
-            print(f"Saving {output_path.stem} directly")
+            if extension == audio_bytes_format:
+                print(f"Saving {output_path.stem} directly")
+                handler.bytes_to_file(audio_bytes, output_path)
+            elif extension == "source":
+                output_str = filename + "." + audio_bytes_format
+                output_path = temp_path.parent / output_str
+                print(f"Saving {filename} as {extension}")
+                handler.bytes_to_file(audio_bytes, output_path)
+            else:
+                output_str = filename + "." + extension
+                output_path = temp_path.parent / output_str
+                print(f"Converting {filename} to {extension}")
+                handler.convert_audio_format(audio_bytes, output_path)
+        except:
             handler.bytes_to_file(audio_bytes, output_path)
-        elif extension == "source":
-            output_str = filename + "." + audio_bytes_format
-            output_path = temp_path.parent / output_str
-            print(f"Saving {filename} as {extension}")
-            handler.bytes_to_file(audio_bytes, output_path)
-        else:
-            output_str = filename + "." + extension
-            output_path = temp_path.parent / output_str
-            print(f"Converting {filename} to {extension}")
-            handler.convert_audio_format(audio_bytes, output_path)
-
         return output_path
 
 
