@@ -314,12 +314,16 @@ class ZSpotify:
             artist_name = track.get("release_date")
         album_artist = track.get("album_artist")
         album_name = track["album_name"]
+        release_date = track.get("release_date")
 
+        info = artist_name
+        if caller == "episode":
+            info = release_date
         filename = self.generate_filename(
             caller,
             audio_name,
             audio_number,
-            artist_name,
+            info,
             album_name,
         )
 
