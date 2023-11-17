@@ -695,6 +695,8 @@ class ZSpotify:
 
 
 def main():
+    unbuffered = os.fdopen(sys.stdout.fileno(), 'w', 0)
+    sys.stdout = unbuffered
     """Creates an instance of ZSpotify"""
     zs = ZSpotify()
 
