@@ -47,7 +47,7 @@ class Respot:
 
         # Determine format of file downloaded
         audio_bytes_format = handler.determine_file_extension(audio_bytes)
-
+        print(audio_bytes_format);
         # Format handling
         output_path = temp_path
 

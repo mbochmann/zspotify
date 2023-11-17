@@ -134,7 +134,7 @@ class ZSpotify:
             "--audio-format",
             help="Audio format to download the tracks. Use 'source' to preserve the source format without conversion.",
             default="mp3",
-            choices=["mp3", "ogg", "source"],
+            #choices=["mp3", "ogg", "source"],
         )
         parser.add_argument(
             "--album-in-filename",
