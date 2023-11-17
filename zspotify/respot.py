@@ -44,13 +44,14 @@ class Respot:
 
         if audio_bytes is None:
             return ""
+        
+        output_path = temp_path
 
         # Determine format of file downloaded
         try:
             audio_bytes_format = handler.determine_file_extension(audio_bytes)
             print(audio_bytes_format);
             # Format handling
-            output_path = temp_path
 
             if extension == audio_bytes_format:
                 print(f"Saving {output_path.stem} directly")
